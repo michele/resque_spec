@@ -48,7 +48,7 @@ module ResqueSpec
 
     def remove_delayed_selection(klass = nil)
       raise ArgumentError, 'Please supply a block' unless block_given?
-      return remove_delayed_selection_without_resque_spec(klass, &Proc.new) if ResqueSpec.disable_ext && respond_to?(:remove_delayed_selection_without_resque_spec)
+      return remove_delayed_selection_without_resque_spec(klass) {yield} if ResqueSpec.disable_ext && respond_to?(:remove_delayed_selection_without_resque_spec)
       ResqueSpec.remove_delayed_selection(klass, &Proc.new)
     end
 
